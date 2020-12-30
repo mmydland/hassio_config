@@ -1,0 +1,8 @@
+christmas_lights:
+  name: Christmas Lights
+  entities: 
+    - switch.behind_hutch_outlet
+    - switch.bottom_of_stairs_outlet
+    - switch.front_door_outlet
+    - switch.great_room_outlet
+    - switch.sliding_door_outlet

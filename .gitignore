@@ -1,0 +1,16 @@
+secrets.yaml
+*.log
+*.xml
+*.db
+*.sqlite
+.storage/
+OZW_Log.txt
+harmony_harmony_hub.conf
+known_devices.yaml
+.HA_VERSION
+*.pem
+.cloud/production_auth.json
+**/__pycache__
+custom_components/alexa_media/.translations
+custom_components/alexa_media/translations
+**/__init__.py

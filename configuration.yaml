@@ -1,0 +1,46 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'date_time'
+
+# Example of minimum configuration.yaml entry
+lutron_caseta_pro:
+  bridges:
+    - host: 192.168.1.33
+      mac: 7C:38:66:D0:7C:9D
+
+recorder:
+  auto_purge: true
+
+panel_custom:
+  - name: zwave-graph-panel
+    url_path: zwave-graph
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:z-wave
+    module_url: /local/zwavegraph3.js
+    config:
+      # ranker - pick one: network-simplex, tight-tree, longest-path
+      ranker: network-simplex
+      # edge_visibility - pick one: relevant, all
+      edge_visibility: relevant
+      # grouping - pick one: z-wave, ungrouped
+      grouping: z-wave
+
+panel_iframe:
+  mdiindex:
+    title: MDI Icon Index
+    icon: mdi:vector-square
+    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html

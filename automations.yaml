@@ -1,0 +1,96 @@
+- id: '1604901709164'
+  alias: Close the large garage door
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:30:00'
+  condition:
+  - condition: device
+    device_id: 357e31d9345dcc101fa809e55db88a77
+    domain: cover
+    entity_id: cover.large_door
+    type: is_open
+  action:
+  - device_id: 357e31d9345dcc101fa809e55db88a77
+    domain: cover
+    entity_id: cover.large_door
+    type: close
+  mode: single
+- id: '1604902535367'
+  alias: Close small garage door
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:30:00'
+  condition:
+  - condition: device
+    device_id: 0b245068ae4ab59754df5616fe199cbd
+    domain: cover
+    entity_id: cover.small_door
+    type: is_open
+  action:
+  - device_id: 0b245068ae4ab59754df5616fe199cbd
+    domain: cover
+    entity_id: cover.small_door
+    type: close
+  mode: single
+- id: '1606019056176'
+  alias: Christmas lights turn on at sunset
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - scene: scene.christmas_lights
+  - service: homeassistant.turn_on
+    data: {}
+    entity_id: group.christmas_lights
+  - type: turn_on
+    device_id: dd3b64b9ee2bb1738cec43463ac6f0f7
+    entity_id: switch.inovelli_unknown_type_c000_id_c003_switch
+    domain: switch
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.gosund_wp3_01_relay
+  - wait_template: '{{ is_state(''switch.front_door_outlet'', ''on'') }}'
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.xmas_tree_remote_clear
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.kitchen_echo_show
+      media_content_id: O Tannenbaum
+      media_content_type: SPOTIFY
+      extra:
+        timer: 15
+  mode: single
+- id: '1606020104601'
+  alias: Turn outdoor Christmas lights off
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: -01:00:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: dd3b64b9ee2bb1738cec43463ac6f0f7
+    entity_id: switch.inovelli_unknown_type_c000_id_c003_switch
+    domain: switch
+  mode: single
+- id: '1606179824261'
+  alias: Turn indoor Christmas lights off
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:01:00
+  condition: []
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    entity_id: group.christmas_lights
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.gosund_wp3_01_relay
+  mode: single
