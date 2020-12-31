@@ -73,7 +73,7 @@ alert:
     notifiers:
       - alexa_tts_group
   
-    laundry_leak_sensor_offline:
+  laundry_leak_sensor_offline:
     name: Leak detector in laundry room is offline
     entity_id: sensor.laundry_water_sensor_wifi_signal
     state: "unavailable"
