@@ -1,0 +1,40 @@
+laundry_water_leak:
+  name: Leak detected in laundry room
+  entity_id: binary_sensor.laundry_water_sensor
+  state: "on"
+  repeat:
+    - 1
+    - 2
+    - 3
+    - 5
+    - 10
+    - 30
+  can_acknowledge: true
+  notifiers:
+    - alexa_tts_group
+
+gosund_not_available:
+  name: gosund_wp3_01 offline
+  message: gosund plug 01 is offline
+  done_message: gosund plug is back online
+  entity_id: sensor.gosund_wp3_01_wifi_signal
+  state: "unavailable"
+  repeat:
+    - 15
+    - 30
+  skip_first: true
+  notifiers:
+    - alexa_tts_group
+
+laundry_leak_sensor_offline:
+  name: Leak detector in laundry room is offline
+  message: Laundry room water sensor is offline
+  done_message: Laundry room water sensor is back online
+  entity_id: sensor.laundry_water_sensor_wifi_signal
+  state: "unavailable"
+  repeat:
+    - 15
+    - 30
+  skip_first: true
+  notifiers:
+    - alexa_tts_group
