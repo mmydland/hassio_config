@@ -62,6 +62,14 @@ alert:
     notifiers:
       - alexa_tts
       - ClickSend
+  
+  gosund_not_available:
+    name: gosund_wp3_01 offline
+    entity_id: sensor.gosund_wp3_01_wifi_signal
+    state: "unavailable"
+    notifiers:
+      - ClickSend
+    repeat: 30
 
 notify:
   - platform: group
