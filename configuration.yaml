@@ -60,27 +60,42 @@ alert:
       - 30
     can_acknowledge: true
     notifiers:
-      - alexa_tts
-      - ClickSend
+      - alexa_tts_group
   
   gosund_not_available:
     name: gosund_wp3_01 offline
     entity_id: sensor.gosund_wp3_01_wifi_signal
     state: "unavailable"
+    repeat: 
+      - 15
+      - 30
+    skip_first: true
     notifiers:
-      - ClickSend
+      - alexa_tts_group
+  
+  laundry_leak_sensor_offline:
+    name: Leak detector in laundry room is offline
+    entity_id: sensor.laundry_water_sensor_wifi_signal
+    state: "unavailable"
+    repeat: 
+      - 15
+      - 30
+    skip_first: true
+    notifiers:
+      - alexa_tts_group
 
 notify:
+  - platform: clicksend
+    name: ClickSend
+    username: !secret clicksend_user
+    api_key: !secret clicksend_api_key
+    recipient: !secret clicksend_phone
   - platform: group
-    name: alexa_tts
+    name: alexa_tts_group
     services:
       - service: alexa_media_kitchen_echo_show
         data:
           data:
             type: tts
       - service: notify
-  - platform: clicksend
-    name: ClickSend
-    username: !secret clicksend_user
-    api_key: !secret clicksend_api_key
-    recipient: !secret clicksend_phone
+      - service: ClickSend
