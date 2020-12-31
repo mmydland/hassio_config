@@ -44,3 +44,30 @@ panel_iframe:
     title: MDI Icon Index
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+
+
+alert:
+  laundry_water_leak:
+    name: Leak detected in laundry room
+    entity_id: binary_sensor.laundry_water_sensor
+    state: "on"
+    repeat: 
+      - 1
+      - 2
+      - 3
+      - 5
+      - 10
+      - 30
+    can_acknowledge: true
+    notifiers:
+      - alexa_tts
+
+notify:
+  platform: group
+  name: alexa_tts
+  services:
+    - service: alexa_media_kitchen_echo_show
+      data:
+        data:
+          type: tts
+    - service: notify
