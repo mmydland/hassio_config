@@ -17,12 +17,6 @@ sensor:
       - "date"
       - "date_time"
 
-# Example of minimum configuration.yaml entry
-lutron_caseta_pro:
-  bridges:
-    - host: 192.168.1.33
-      mac: 7C:38:66:D0:7C:9D
-
 recorder:
   auto_purge: true
 
@@ -46,6 +40,12 @@ panel_iframe:
     icon: mdi:vector-square
     url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
 
+input_boolean:
+  prevent_deep_sleep:
+    name: Prevent Deep Sleep
+    icon: mdi:sleep-off
+  fountain_ota_mode:
+    name: Fountain in OTA Mode
 
 notify:
   - platform: clicksend
@@ -62,3 +62,9 @@ notify:
             type: tts
       - service: notify
       - service: clicksend
+  - platform: pushover
+    name: Pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+logger:

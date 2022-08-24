@@ -66,7 +66,7 @@
         timer: 15
   mode: single
 - id: '1606020104601'
-  alias: Turn outdoor Christmas lights off
+  alias: 'Turn off outdoor Christmas lights '
   description: ''
   trigger:
   - platform: sun
@@ -75,8 +75,8 @@
   condition: []
   action:
   - type: turn_off
-    device_id: dd3b64b9ee2bb1738cec43463ac6f0f7
-    entity_id: switch.inovelli_unknown_type_c000_id_c003_switch
+    device_id: 8b92ac4179025c4e5425c5288d3e953c
+    entity_id: switch.outdoor_z_wave_plug_in_module_1_channel
     domain: switch
   mode: single
 - id: '1606179824261'
@@ -93,4 +93,154 @@
   - service: switch.turn_off
     data: {}
     entity_id: switch.gosund_wp3_01_relay
+  mode: single
+- id: '1639155893059'
+  alias: Turn on outdoor Christmas lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '0'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 8b92ac4179025c4e5425c5288d3e953c
+    entity_id: switch.outdoor_z_wave_plug_in_module_1_channel
+    domain: switch
+  mode: single
+- id: '1641146256521'
+  alias: Heat garage for workout
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:00:00
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.kpae_temperature
+    below: '50'
+  - condition: state
+    entity_id: switch.garage_heater_plug_relay
+    state: 'off'
+  action:
+  - type: turn_on
+    device_id: 07702241641a21879c24a9c286b9207c
+    entity_id: switch.garage_heater_plug_relay
+    domain: switch
+  mode: single
+- id: '1641147292899'
+  alias: Turn off heater in garage after workout
+  description: ''
+  trigger:
+  - platform: time
+    at: 09:00:00
+  condition:
+  - condition: state
+    entity_id: switch.garage_heater_plug_relay
+    state: 'on'
+  action:
+  - type: turn_off
+    device_id: 07702241641a21879c24a9c286b9207c
+    entity_id: switch.garage_heater_plug_relay
+    domain: switch
+  mode: single
+- id: '1647355971931'
+  alias: Porch lights on at dusk
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '0'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: f6c3db0f4399e45edb255da6345bffbd
+    entity_id: light.back_porch_light
+    domain: light
+  mode: single
+- id: '1647356157246'
+  alias: Porch lights off at midnight
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:01:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: f6c3db0f4399e45edb255da6345bffbd
+    entity_id: light.back_porch_light
+    domain: light
+  mode: single
+- id: '1660284508323'
+  alias: Fountain Battery Low Alert
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.fountain_gadget_vbatt_2
+    below: '3.25'
+  condition: []
+  action:
+  - service: notify.pushover
+    data:
+      title: Fountain Battery Low-ish
+      message: "Current battery voltage is {{ states('sensor.fountain_gadget_vbatt_2')}}.
+        \nBatt % is {{ states('sensor.fountain_battery_level_2') }}."
+      data:
+        priority: 0
+        sound: pushover
+  - delay:
+      hours: 1
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  mode: single
+- id: '1660286051494'
+  alias: Fountain Battery Critical
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.fountain_gadget_vbatt_2
+    below: '3.2'
+  condition: []
+  action:
+  - service: notify.pushover
+    data:
+      title: Fountain Battery Critical
+      message: "Current battery voltage is {{ states('sensor.fountain_gadget_vbatt_2')}}.
+        \nBatt % is {{ states('sensor.fountain_battery_level_2') }}."
+      data:
+        priority: 1
+        sound: pushover
+  - delay:
+      hours: 1
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  mode: single
+- id: '1660287868444'
+  alias: Fill the fountain
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.fountain_monitor
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.front_side_flowerbeds_and_fountain
+  - service: notify.pushover
+    data:
+      title: Fountain fill
+      message: Fountain is low on water. Sprinkler has been started.
+  - delay:
+      hours: 0
+      minutes: 3
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.front_side_flowerbeds_and_fountain
   mode: single

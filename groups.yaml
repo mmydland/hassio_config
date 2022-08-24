@@ -1,8 +1,104 @@
 christmas_lights:
   name: Christmas Lights
-  entities: 
-    - switch.behind_hutch_outlet
-    - switch.bottom_of_stairs_outlet
-    - switch.front_door_outlet
-    - switch.great_room_outlet
-    - switch.sliding_door_outlet
+  entities:
+    - switch.behind_hutch_plug
+    - switch.bottom_of_stairs_plug
+    - switch.front_door_plug
+    - switch.great_room_plug
+    - switch.sliding_door_plug
+
+guest_area_lights:
+  name: Guest Area Lights
+  entities:
+    - light.guest_hallway_lights
+    - switch.harry_potter_closet_lights
+    - light.mudroom_light
+    - switch.guest_bathroom_lights
+    - switch.guest_bathroom_fan
+    - light.guest_bedroom_lights
+
+great_room_lights:
+  name: Great Room Lights
+  entities:
+    - switch.great_room_spot
+    - light.great_room_main_lights
+    - light.great_room_media_lamps
+    - light.great_room_shelves
+
+kitchen_lights:
+  name: Kitchen Lights
+  entities:
+    - switch.kitchen_cabinet
+    - light.kitchen_island
+    - light.kitchen_main
+    - light.kitchen_table
+
+living_room_lights:
+  name: Living Room Lights
+  entities:
+    - light.living_room_lights
+    - light.living_room_pendant
+    - light.hallway_lights
+    - light.stairs_lights
+
+dining_room_lights:
+  name: Dining Room Lights
+  entities:
+    - light.dining_room_lamps
+    - light.dining_room_light
+
+master_bathroom_lights:
+  name: Master Bathroom Lights
+  entities:
+    - switch.master_bathroom_vanity_lights
+    - switch.master_bathroom_tub_light
+    - switch.master_bathroom_toilet_light
+    - switch.master_bathroom_toilet_fan
+    - switch.master_bathroom_exhaust_fan
+    - switch.master_bathroom_shower_lights
+    - switch.master_bedroom_closet_light
+
+master_bedroom_lights:
+  name: Master Bedroom Lights
+  entities:
+    - light.master_bedroom_main_light
+    - light.master_bedroom_office_lights
+
+main_bathroom_lights:
+  name: Main Bathroom Lights
+  entities:
+    - switch.main_bathroom_exhaust_fan
+    - switch.main_bathroom_shower_lights
+    - switch.main_bathroom_vanity_lights
+
+upstairs_hallway_lights:
+  name: Upstairs hallway lights
+  entities:
+    - light.upstairs_hallway_lights
+    - light.upstairs_landing_nook_light
+    - light.upstairs_landing_sconce_2
+
+loft_lights:
+  name: Loft lights
+  entities:
+    - switch.laundry_room_light
+    - switch.craft_closet_light
+    - light.loft_lights
+
+bedroom_lights:
+  name: Bedroom Lights
+  entities:
+    - light.abby_bedroom_light
+    - light.sarah_bedroom_light
+    - light.sid_bedroom_light
+
+sprinkler_all_zones:
+  name: All sprinklers
+  entities:
+    - switch.backyard_ne
+    - switch.backyard_se
+    - switch.dog_area
+    - switch.front_grass
+    - switch.front_side_flowerbeds_and_fountain
+    - switch.foundation
+    - switch.side_of_house_back

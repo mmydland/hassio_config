@@ -13,18 +13,19 @@ laundry_water_leak:
   notifiers:
     - alexa_tts_group
 
-gosund_not_available:
-  name: gosund_wp3_01 offline
-  message: gosund plug 01 is offline
-  done_message: gosund plug is back online
-  entity_id: sensor.gosund_wp3_01_wifi_signal
-  state: "unavailable"
-  repeat:
-    - 15
-    - 30
-  skip_first: true
-  notifiers:
-    - alexa_tts_group
+# gosund_not_available:
+#   name: gosund_wp3_01 offline
+#   message: gosund plug 01 is offline
+#   done_message: gosund plug is back online
+#   entity_id: sensor.gosund_wp3_01_wifi_signal
+#   state: "unavailable"
+#   repeat:
+#     - 15
+#     - 30
+#   skip_first: true
+#   can_acknowledge: true
+#   notifiers:
+#     - alexa_tts_group
 
 laundry_leak_sensor_offline:
   name: Leak detector in laundry room is offline
